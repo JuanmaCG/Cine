@@ -57,9 +57,5 @@ export class AuthService {
   }
 
 
-  isUserAdmin(userUid) {
-    return this.afs.doc<User>(`users/${userUid}`).valueChanges();
-  }
-
 
 }

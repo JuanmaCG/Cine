@@ -18,6 +18,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
+    
     this.authService.loginEmailUser(this.email, this.password)
       .then((res) => {
         this.onLoginRedirect();
@@ -28,12 +29,12 @@ export class LoginComponent implements OnInit {
     this.afAuth.auth.signInWithPopup( new auth.GoogleAuthProvider())
   }
 
-
   onLogout() {
     this.authService.logoutUser();
   }
+
   onLoginRedirect(): void {
-    this.router.navigate(['admin/list-books']);
+    this.router.navigate(['cartelera']);
   }
 
 }

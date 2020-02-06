@@ -1,19 +1,19 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-
-
     <div class="mx-auto order-0">
-
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
     <div class="navbar-collapse w-100 order-3">
         <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" href="#">Login As</a>
+            <li *ngIf="!isLogged" class="nav-item">
+                <a class="btn btn-light" (click)="onLogin()">Login As</a>
+            </li>
+            <li>
+                <a *ngIf="isLogged" class="btn btn-primary" routerLink="/profile">Perfil</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Log Out</a>
+                <a *ngIf="isLogged" class="btn btn-danger" (click)="onLogOut()">Log Out</a>
             </li>
         </ul>
     </div>
