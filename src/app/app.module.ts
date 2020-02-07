@@ -16,8 +16,9 @@ import { UserProfileComponent } from './user-profile/user-profile.component';
 import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
-import { CarteleraComponent } from './cartelera/cartelera.component';
-
+import { HttpClientModule } from "@angular/common/http";
+import { CarteleraTestComponent } from './cartelera-test/cartelera-test.component';
+import { MovieDetailsComponent } from './movie-details/movie-details.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,7 +26,8 @@ import { CarteleraComponent } from './cartelera/cartelera.component';
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
-    CarteleraComponent
+    CarteleraTestComponent,
+    MovieDetailsComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +38,8 @@ import { CarteleraComponent } from './cartelera/cartelera.component';
     AngularFireDatabaseModule,
     FormsModule,
     NgbModule,
-    AngularFontAwesomeModule
+    AngularFontAwesomeModule,
+    HttpClientModule
   ],
   providers: [AngularFireAuth],
   bootstrap: [AppComponent]

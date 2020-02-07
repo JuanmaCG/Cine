@@ -1,0 +1,25 @@
+<div class="container">
+    <div class="row mt-3">
+        <div class="col-6">
+            <img [src]="movie.Poster">
+        </div>
+        <div class="col-6">
+            <div class="card text-center">
+                <div class="card-header">{{movie.Title}}</div>
+                <div class="card-body">
+                    <h5 class="card-title text-danger">Plot</h5>
+                    <p class="card-text ">{{movie.Plot}}</p>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item text-danger">Rating</li>
+                    <li class="list-group-item">{{movie.Ratings[0].Value}} <i class="fa fa-star"></i></li>
+                    <li class="list-group-item text-danger">Director</li>
+                    <li class="list-group-item">{{movie.Director}}</li>
+                </ul>
+                <div class="card-body">
+                    <a href="#" class="card-link">Añadir favorito</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
+import { finalize, timeout } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -19,7 +19,8 @@ export class RegistroComponent implements OnInit {
   public email: string = '';
   public password: string = '';
   public name: string = '';
-
+  public registered: boolean = false;
+  public registeredFail: boolean = false;
 
   ngOnInit() {
   }
@@ -36,11 +37,11 @@ export class RegistroComponent implements OnInit {
             user.updateProfile({
               displayName: '', 
             }).then(() => {
-              alert('Cuenta creada con exito')
+              this.registered = true;
             }).catch((error) => console.log('error', error));
           }
         });
-      }).catch(err => console.log('err', alert('Esta email esta siendo ya utilizada')));
+      }).catch(err => this.registeredFail = true);
   }
   onLoginGoogle(): void {
     this.authService.loginGoogleUser()
@@ -50,8 +51,11 @@ export class RegistroComponent implements OnInit {
   }
  
   onLoginRedirect(): void {
-    this.router.navigate(['admin/list-books']);
+    this.router.navigate(['cartelera']);
   }
 
+  closeModal() {
+    this.modalService.dismissAll()
+  }
 
 }

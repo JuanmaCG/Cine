@@ -7,7 +7,7 @@
     <div class="navbar-collapse w-100 order-3">
         <ul class="navbar-nav ml-auto">
             <li *ngIf="!isLogged" class="nav-item">
-                <a class="btn btn-light" (click)="onLogin()">Login As</a>
+                <a class="btn btn-light" routerLink="/login">Login As</a>
             </li>
             <li>
                 <a *ngIf="isLogged" class="btn btn-primary" routerLink="/profile">Perfil</a>

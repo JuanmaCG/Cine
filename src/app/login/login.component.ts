@@ -18,7 +18,6 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(): void {
-    
     this.authService.loginEmailUser(this.email, this.password)
       .then((res) => {
         this.onLoginRedirect();
@@ -26,7 +25,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginGoogle(): void {
-    this.afAuth.auth.signInWithPopup( new auth.GoogleAuthProvider())
+    this.afAuth.auth.signInWithPopup( new auth.GoogleAuthProvider()).then(() => this.onLoginRedirect())
+    
   }
 
   onLogout() {
