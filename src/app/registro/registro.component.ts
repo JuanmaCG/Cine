@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize, timeout } from 'rxjs/operators';
+import { finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 
@@ -22,8 +22,11 @@ export class RegistroComponent implements OnInit {
   public registered: boolean = false;
   public registeredFail: boolean = false;
 
+
+
   ngOnInit() {
   }
+
 
   registerModal(content) {
     this.modalService.open(content, { centered: true});

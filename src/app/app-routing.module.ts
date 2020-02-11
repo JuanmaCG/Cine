@@ -10,9 +10,9 @@ import { MovieDetailsComponent } from "./movie-details/movie-details.component";
 
 const routes: Routes = [
   {path: '', component: LoginComponent},
-  {path: 'user', component: UserProfileComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'movie/:title', component: MovieDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'cartelera/:title', component: MovieDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   // {
   //   path: "cartelera",
   //   loadChildren: () => import('./cartelera/cartelera.module').then(m => m.CarteleraModule)

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MovieService } from '../movie.service';
 
 @Component({
@@ -10,12 +10,14 @@ import { MovieService } from '../movie.service';
 export class MovieDetailsComponent implements OnInit {
 
   movie: any;
-  constructor(private route: ActivatedRoute, private movieService: MovieService) { }
+  constructor(private route: ActivatedRoute, private movieService: MovieService, private router: Router) { }
 
   ngOnInit() {
     this.movieService.getMovieByTitle(this.route.snapshot.params['title']).subscribe(data => this.movie = data)
   }
 
-  
+  back(){
+    this.router.navigate['/cartelera']
+  }
 
 }

@@ -11,11 +11,15 @@ export class CarteleraTestComponent implements OnInit {
 
   movies = []
 
-  constructor(private movieService: MovieService) { }
+  constructor(private movieService: MovieService, private route: Router) { }
 
   ngOnInit() {
+    this.movies = []
     this.movies = this.movieService.getMovies()
   }
 
+  toDetails(title: string) {
+    this.route.navigate(['/cartelera', title])
+  }
 
 }

@@ -12,8 +12,7 @@ export class CarteleraComponent implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.movieService.getMovies().subscribe(data => data = this.movies)
-    console.log(this.movies)
+    this.movies = this.movieService.getMovies()
   }
 
 }
