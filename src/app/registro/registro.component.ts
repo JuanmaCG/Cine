@@ -35,7 +35,7 @@ export class RegistroComponent implements OnInit {
   onAddUser() {
     this.authService.registerUser(this.email, this.password)
       .then((res) => {
-        this.authService.isAuth().subscribe(user => {
+        this.authService.authState.subscribe(user => {
           if (user) {
             user.updateProfile({
               displayName: '', 

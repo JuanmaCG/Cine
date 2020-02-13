@@ -9,18 +9,16 @@ import { AngularFireAuth } from '@angular/fire/auth';
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
-  constructor(private afsAuth: AngularFireAuth, private router: Router) { }
+  constructor(private auth: AuthService, private afsAuth: AngularFireAuth, private router: Router) { }
+  
   canActivate(
     next: ActivatedRouteSnapshot,
-    state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-
-    return this.afsAuth.authState
-      .pipe(take(1))
-      .pipe(map(authState => !!authState))
-      .pipe(tap(auth => {
-        if (!auth) {
-          this.router.navigate(['/login']);
-        }
-      }));
-  }
+    state: RouterStateSnapshot): Observable<boolean> | boolean {
+      console.log(this.auth.authState)
+      if (this.auth.authState) {return true;}
+      this.router.navigate(['/login']);
+      return false;
+    }
+  
+  
 }

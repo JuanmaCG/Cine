@@ -13,11 +13,10 @@ export class MovieDetailsComponent implements OnInit {
   constructor(private route: ActivatedRoute, private movieService: MovieService, private router: Router) { }
 
   ngOnInit() {
+    console.log()
     this.movieService.getMovieByTitle(this.route.snapshot.params['title']).subscribe(data => this.movie = data)
   }
 
-  back(){
-    this.router.navigate['/cartelera']
-  }
+  
 
 }

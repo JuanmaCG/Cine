@@ -18,13 +18,14 @@ export class NavbarComponent implements OnInit {
   }
 
   isAuth() {
-    this.authService.isAuth().subscribe(auth => {
-      if (auth) {
+      if (this.authService.authState) {
+        console.log(this.authService.authState)
         this.isLogged = true;
       } else {
+        console.log(this.authService.authState)
         this.isLogged = false;
       }
-    });
+   
   }
 
 

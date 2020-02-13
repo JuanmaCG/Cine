@@ -20,6 +20,7 @@ export class MovieService {
 
 
   getMovies() {
+    this.movies = []
     this.http.get(`${this.url}t=pokemon`).subscribe(data => this.movies.push(data))
     this.http.get(`${this.url}t=the+fifth+element`).subscribe(data => this.movies.push(data))
     this.http.get(`${this.url}t=doraemon`).subscribe(data => this.movies.push(data))
