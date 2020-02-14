@@ -10,7 +10,7 @@
                 <a class="btn btn-light" routerLink="/login">Login As</a>
             </li>
             <li>
-                <a *ngIf="isLogged" class="btn btn-primary" routerLink="/profile">Perfil</a>
+                <a *ngIf="isLogged" class="btn btn-primary" [routerLink]="['/profile']">Perfil</a>
             </li>
             <li class="nav-item">
                 <a *ngIf="isLogged" class="btn btn-danger" (click)="onLogOut()">Log Out</a>

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MovieService } from '../movie.service';
 import { Router } from '@angular/router';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-cartelera-test',
@@ -11,7 +13,7 @@ export class CarteleraTestComponent implements OnInit {
 
   movies = []
 
-  constructor(private movieService: MovieService) { }
+  constructor(public movieService: MovieService) { }
 
   ngOnInit() {
     this.movies = this.movieService.getMovies()

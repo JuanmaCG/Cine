@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { AuthService } from './auth.service';
+import { FirebaseAuth } from '@angular/fire';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +14,7 @@ export class MovieService {
   movies = [];
   url = ''
 
-  constructor(private http: HttpClient) { 
+  constructor(private http: HttpClient, private db: AngularFirestore, private af: AngularFireAuth) { 
     this.url = 'http://www.omdbapi.com/?apikey=a61fdc4a&'
   }
 
@@ -20,6 +24,7 @@ export class MovieService {
 
 
   getMovies() {
+    this.movies = []
     this.http.get(`${this.url}t=pokemon`).subscribe(data => this.movies.push(data))
     this.http.get(`${this.url}t=the+fifth+element`).subscribe(data => this.movies.push(data))
     this.http.get(`${this.url}t=doraemon`).subscribe(data => this.movies.push(data))
@@ -36,6 +41,8 @@ export class MovieService {
   }
 
   addToFavorite(movie) { 
-    
+    this.af.user.subscribe(user => {
+      this.db.collection(user.email).add(movie)
+    })
   }
 }

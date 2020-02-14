@@ -15,11 +15,12 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
 
     return this.afsAuth.authState
-      .pipe(take(1))
       .pipe(map(authState => !!authState))
       .pipe(tap(auth => {
         if (!auth) {
-          this.router.navigate(['/user/login']);
+          console.log(auth)
+
+          this.router.navigate(['/login']);
         }
       }));
   }

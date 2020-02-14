@@ -9,15 +9,15 @@ import { MovieDetailsComponent } from "./movie-details/movie-details.component";
 
 
 const routes: Routes = [
-  {path: '', component: LoginComponent},
-  {path: 'user', component: UserProfileComponent, canActivate: [AuthGuard]},
+  {path: '', component: CarteleraTestComponent},
+  {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
   {path: 'login', component: LoginComponent},
-  {path: 'movie/:title', component: MovieDetailsComponent, canActivate: [AuthGuard]},
+  {path: 'movie/:title', component: MovieDetailsComponent},
   // {
   //   path: "cartelera",
   //   loadChildren: () => import('./cartelera/cartelera.module').then(m => m.CarteleraModule)
   // }
-  {path: 'cartelera', component: CarteleraTestComponent, canActivate: [AuthGuard]}
+  // {path: 'cartelera', component: CarteleraTestComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({

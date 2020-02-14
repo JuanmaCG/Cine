@@ -27,15 +27,23 @@ export class AuthService {
   loginEmailUser(email: string, pass: string) {
     return new Promise((resolve, reject) => {
       this.afsAuth.auth.signInWithEmailAndPassword(email, pass)
-        .then(userData => resolve(userData),
-        err => reject(err));
+        .then(userData => {
+          resolve(userData)
+        },
+          err => reject(err));
     });
   }
 
 
   loginGoogleUser() {
     return this.afsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
-      .then(credential => this.updateUserData(credential.user))
+      .then(credential => {
+        this.afs.doc(credential.user.email + '/data').set({
+          name: credential.user.displayName,
+          email: credential.user.email
+        });
+        this.updateUserData(credential.user)
+      })
   }
 
   logoutUser() {

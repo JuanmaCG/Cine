@@ -10,7 +10,7 @@
                 </div>
                 <div class="card-body ">
                     <button class="card-link btn btn-secondary" [routerLink]="['/movie', movie.Title]">Información</button>
-                    <button class="card-link btn btn-primary">Favoritos</button>
+                    <button class="card-link btn btn-primary" (click)="movieService.addToFavorite(movie)">Favoritos</button>
                 </div>
             </div>
 
