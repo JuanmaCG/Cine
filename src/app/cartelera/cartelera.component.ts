@@ -12,7 +12,7 @@ export class CarteleraComponent implements OnInit {
   constructor(private movieService: MovieService) { }
 
   ngOnInit() {
-    this.movies = this.movieService.getMovies()
+    this.movieService.getMovies()
   }
 
 }

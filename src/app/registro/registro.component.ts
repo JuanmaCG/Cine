@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { AngularFireStorage } from '@angular/fire/storage';
 import { finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private router: Router, private authService: AuthService) { }
+  constructor(private modalService: NgbModal, private router: Router, private authService: AuthService, private db: AngularFirestore) { }
 
   public email: string = '';
   public password: string = '';
@@ -35,7 +36,10 @@ export class RegistroComponent implements OnInit {
   onAddUser() {
     this.authService.registerUser(this.email, this.password)
       .then((res) => {
-        this.authService.authState.subscribe(user => {
+        this.authService.isAuth().subscribe(user => {
+          this.db.doc(user.email + '/data').set({
+            email: user.email
+          });
           if (user) {
             user.updateProfile({
               displayName: '', 

@@ -34,7 +34,7 @@ export class LoginComponent implements OnInit {
   }
 
   onLoginRedirect(): void {
-    this.router.navigate(['cartelera']);
+    this.router.navigate(['']);
   }
 
 }

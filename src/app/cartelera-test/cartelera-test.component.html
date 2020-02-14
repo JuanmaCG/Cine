@@ -9,8 +9,8 @@
                     <p class="card-text ">{{movie.Plot}}</p>
                 </div>
                 <div class="card-body ">
-                    <a class="card-link btn btn-secondary" (click)="toDetails(movie.Title)">Información</a>
-                    <a class="card-link btn btn-primary " [routerLink]="[ '/cartelera', movie.Title] ">Favoritos</a>
+                    <button class="card-link btn btn-secondary" [routerLink]="['/movie', movie.Title]">Información</button>
+                    <button class="card-link btn btn-primary" (click)="movieService.addToFavorite(movie)">Favoritos</button>
                 </div>
             </div>
 

@@ -19,9 +19,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { HttpClientModule } from "@angular/common/http";
 import { CarteleraTestComponent } from './cartelera-test/cartelera-test.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
-import { RouterModule } from '@angular/router';
 import { AuthGuard } from './auth.guard';
-
 @NgModule({
   declarations: [
     AppComponent,
