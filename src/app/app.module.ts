@@ -40,8 +40,7 @@ import { AuthGuard } from './auth.guard';
     FormsModule,
     NgbModule,
     AngularFontAwesomeModule,
-    HttpClientModule,
-    RouterModule
+    HttpClientModule
   ],
   providers: [AngularFireAuth, AuthGuard],
   bootstrap: [AppComponent]

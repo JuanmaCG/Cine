@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { MovieService } from '../movie.service';
+import { AngularFireAuth } from '@angular/fire/auth';
 
 @Component({
   selector: 'app-user-profile',
@@ -8,9 +10,18 @@ import { AuthService } from '../auth.service';
 })
 export class UserProfileComponent implements OnInit {
 
-  constructor() { }
+
+  movies = []
+  deleteMovieDone: boolean;
+
+  constructor( private movieService: MovieService) {  }
 
   ngOnInit() {
+    this.movies = this.movieService.getMoviesDb()
   }
+
+  deleteMovie(title: string) {
+    this.movieService.deleteFavMovie(title)
+  } 
 
 }

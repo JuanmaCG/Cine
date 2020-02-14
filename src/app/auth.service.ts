@@ -38,8 +38,8 @@ export class AuthService {
   loginGoogleUser() {
     return this.afsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
       .then(credential => {
+        console.log(credential, "fdsahfdkjs")
         this.afs.doc(credential.user.email + '/data').set({
-          name: credential.user.displayName,
           email: credential.user.email
         });
         this.updateUserData(credential.user)

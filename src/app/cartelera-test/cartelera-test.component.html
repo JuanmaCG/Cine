@@ -10,13 +10,15 @@
                 </div>
                 <div class="card-body ">
                     <button class="card-link btn btn-secondary" [routerLink]="['/movie', movie.Title]">Información</button>
-                    <button class="card-link btn btn-primary" (click)="movieService.addToFavorite(movie)">Favoritos</button>
+                    <button class="card-link btn btn-primary" (click)="addToFav(movie)">Favoritos</button>
                 </div>
             </div>
-
         </div>
-
-
-
+    </div>
+    <div *ngIf="movieExist" class="alert alert-danger fixed-bottom text-center" role="alert">
+        Esta pelicula ya esta añadida a tus favoritos
+    </div>
+    <div *ngIf="movieCorrect" class="alert alert-success fixed-bottom text-center" role="alert">
+        Pelicula Añadida Correctamente
     </div>
 </div>

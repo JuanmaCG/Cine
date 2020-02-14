@@ -1,1 +1,21 @@
-hola
+<div class="container">
+    <div class="row">
+        <div *ngFor="let movie of movies" class="mt-3 col-4">
+            <div class="card">
+                <img class="card-img-top " [src]="movie.Poster ">
+                <div class="card-body ">
+                    <h5 class="card-title ">{{movie.Title}}</h5>
+                    <p class="card-text ">{{movie.Plot}}</p>
+                </div>
+                <div class="card-body ">
+                    <button class="card-link btn btn-secondary" [routerLink]="['/movie', movie.Title]">Información</button>
+                    <button class="card-link btn btn-danger" (click)="deleteMovie(movie.Title)">Borrar</button>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div *ngIf="deleteMovieDone" class="alert alert-success fixed-bottom text-center" role="alert">
+        Pelicula Borrada Correctamente
+    </div>
+</div>
