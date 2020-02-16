@@ -14,13 +14,16 @@ export class MovieService {
   movies = [];
   url = "";
   movie_in_db = false;
+  
 
   constructor(
     private http: HttpClient,
     private db: AngularFirestore,
-    private af: AngularFireAuth
+    private af: AngularFireAuth,
+    private auth: AuthService
   ) {
     this.url = "http://www.omdbapi.com/?apikey=a61fdc4a&";
+
   }
 
   getMovieByTitle(title: string) {
@@ -57,21 +60,25 @@ export class MovieService {
   }
 
   deleteFavMovie(title) {
-    this.af.authState.subscribe(user => {
-      console.log("fidsuhfdsfskd")
-      this.db.collection(user.email).doc(title).delete()
-    });
-    
+  
+    this.db.collection(this.af.auth.currentUser.email).doc(title).delete()
+
+
   }
+
+ 
+
+
 
   getMoviesDb() {
     let movies = [];
     this.af.user.subscribe(user => {
+      this.db.collection(user.email).doc('data').delete()
       this.db
         .collection(user.email)
         .valueChanges()
         .subscribe(data => {
-          data.forEach(doc => {
+          data.forEach(doc => { 
             movies.push(doc);
           });
         });

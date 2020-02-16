@@ -5,6 +5,13 @@
         </button>
     </div>
     <div class="navbar-collapse w-100 order-3">
+
+        <ul class="navbar-nav ">
+            <li>
+                <a *ngIf="isLogged" class="btn btn-primary mr-3" [routerLink]="['/']">Cartelera</a>
+            </li>
+        </ul>
+
         <ul class="navbar-nav ml-auto">
             <li *ngIf="!isLogged" class="nav-item">
                 <a class="btn btn-light" routerLink="/login">Login As</a>

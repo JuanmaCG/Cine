@@ -15,6 +15,7 @@ export class LoginComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private afs: AngularFirestore) { }
   public email: string = '';
   public password: string = '';
+  err;
   ngOnInit() {
   }
 
@@ -22,7 +23,7 @@ export class LoginComponent implements OnInit {
     this.authService.loginEmailUser(this.email, this.password)
       .then((res) => {
         this.onLoginRedirect();
-      }).catch(err => console.log('err', err.message));
+      }).catch(err => this.err = "Este email no existe en nuestra base de datos");
   }
 
   onLoginGoogle(): void {

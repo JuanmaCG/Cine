@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFontAwesomeModule } from 'angular-font-awesome';
 
@@ -8,6 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { AngularFireAuthGuard, AngularFireAuthGuardModule } from "@angular/fire/auth-guard";
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -20,6 +21,8 @@ import { HttpClientModule } from "@angular/common/http";
 import { CarteleraTestComponent } from './cartelera-test/cartelera-test.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { AuthGuard } from './auth.guard';
+import { ErrorComponent } from './error/error.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -28,7 +31,8 @@ import { AuthGuard } from './auth.guard';
     NavbarComponent,
     RegistroComponent,
     CarteleraTestComponent,
-    MovieDetailsComponent
+    MovieDetailsComponent,
+    ErrorComponent
   ],
   imports: [
     BrowserModule,
@@ -38,9 +42,11 @@ import { AuthGuard } from './auth.guard';
     AngularFireAuthModule,
     AngularFireDatabaseModule,
     FormsModule,
+    ReactiveFormsModule,
     NgbModule,
     AngularFontAwesomeModule,
-    HttpClientModule
+    HttpClientModule,
+    AngularFireAuthGuardModule
   ],
   providers: [AngularFireAuth, AuthGuard],
   bootstrap: [AppComponent]

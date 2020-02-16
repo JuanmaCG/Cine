@@ -6,18 +6,20 @@ import { LoginComponent } from './login/login.component';
 import { CarteleraComponent } from './cartelera/cartelera.component';
 import { CarteleraTestComponent } from "./cartelera-test/cartelera-test.component";
 import { MovieDetailsComponent } from "./movie-details/movie-details.component";
+import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
+import { redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+import { ErrorComponent } from './error/error.component';
+
+const redirectUnauthorizedToLanding = redirectUnauthorizedTo(['login']);
 
 
 const routes: Routes = [
   {path: '', component: CarteleraTestComponent},
-  {path: 'profile', component: UserProfileComponent, canActivate: [AuthGuard]},
+  {path: 'profile', component: UserProfileComponent, ...canActivate(redirectUnauthorizedToLanding)},
   {path: 'login', component: LoginComponent},
   {path: 'movie/:title', component: MovieDetailsComponent},
-  // {
-  //   path: "cartelera",
-  //   loadChildren: () => import('./cartelera/cartelera.module').then(m => m.CarteleraModule)
-  // }
-  // {path: 'cartelera', component: CarteleraTestComponent, canActivate: [AuthGuard]}
+  {path: "**", component: ErrorComponent}
+  
 ];
 
 @NgModule({

@@ -29,10 +29,10 @@
 
             <div class="modal-footer">
                 <button type="submit" [disabled]="!formRegister.form.valid" class="btn btn-lg btn-secondary btn-block">Register</button>
-                <div *ngIf="registered" class="alert alert-success" role="alert">
+                <div *ngIf="registered" class="alert alert-success text-center" role="alert">
                     Usuario Creado correctamente
                 </div>
-                <div *ngIf="registeredFail" class="alert alert-danger" role="alert">
+                <div *ngIf="registeredFail" class="alert alert-danger text-center" role="alert">
                     Este email esta siendo ya utilizado
                 </div>
             </div>

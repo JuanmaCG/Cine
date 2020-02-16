@@ -4,13 +4,23 @@
             <form #formLogin="ngForm" (submit)="onLogin()" class="form-container card-body text-center ">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Correo Electronico</label>
-                    <input [(ngModel)]="email" type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email">
+                    <input [(ngModel)]="email" type="email" class="form-control" name="email" #emailForm="ngModel" id="exampleInputEmail1" placeholder="Email" pattern="^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$"
+                        required>
                 </div>
+                <div *ngIf="emailForm.invalid && (emailForm.dirty || emailForm.touched)" class="alert alert-danger">
+                    <div class="text-center" *ngIf="emailForm.errors.required">El email es obligatorio</div>
+                    <div class="text-center" *ngIf="emailForm.errors.pattern">El email debe ser valido</div>
+                </div>
+
+
                 <div class="form-group">
                     <label for="exampleInputPassword1">Contraseña</label>
                     <input [(ngModel)]="password" type="password" class="form-control" name="password" id="exampleInputPassword1" placeholder="Contraseña">
                 </div>
-                <button type="submit" class="btn btn-lg btn-primary btn-block">Login</button>
+                <div *ngIf="err">
+                    <div class="text-center alert alert-danger">{{err}}</div>
+                </div>
+                <button type="submit" [disabled]="!formLogin.form.valid" class="btn btn-lg btn-primary btn-block">Login</button>
                 <div class="form-group">
                     <app-registro></app-registro>
                 </div>

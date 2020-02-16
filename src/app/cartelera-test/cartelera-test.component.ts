@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, OnDestroy } from "@angular/core";
 import { MovieService } from "../movie.service";
 import { Router } from "@angular/router";
 import { AngularFirestore } from "@angular/fire/firestore";
@@ -26,10 +26,10 @@ export class CarteleraTestComponent implements OnInit {
     this.movies = [];
     this.movies = this.movieService.getMovies();
   }
+  
 
   addToFav(movie) {
     this.af.user.subscribe(user => {
-      console.log(user)
       this.db
         .collection(user.email)
         .doc(movie.Title)

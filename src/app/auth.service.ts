@@ -5,7 +5,7 @@ import { auth } from 'firebase/app';
 import { Router } from '@angular/router';
 import { User } from './user';
 import { Observable, of } from 'rxjs';
-import { switchMap, map } from 'rxjs/operators';
+import { switchMap, map, first } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -52,6 +52,10 @@ export class AuthService {
 
   isAuth() {
     return this.afsAuth.authState.pipe(map(auth => auth));
+  }
+
+  getUser(): Promise<any> {
+    return this.afsAuth.authState.pipe(first()).toPromise();
   }
 
   private updateUserData(user) {

@@ -1,11 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
-import { Observable } from 'rxjs';
-import { AngularFireStorage } from '@angular/fire/storage';
-import { finalize } from 'rxjs/operators';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firestore';
+import { AngularFirestore } from '@angular/fire/firestore';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
@@ -15,7 +13,7 @@ import { AngularFirestoreDocument, AngularFirestore } from '@angular/fire/firest
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(private modalService: NgbModal, private router: Router, private authService: AuthService, private db: AngularFirestore) { }
+  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private router: Router, private authService: AuthService, private db: AngularFirestore) { }
 
   public email: string = '';
   public password: string = '';
@@ -23,9 +21,15 @@ export class RegistroComponent implements OnInit {
   public registered: boolean = false;
   public registeredFail: boolean = false;
 
+  registerForm: FormGroup;
 
 
   ngOnInit() {
+    this.registerForm = this.formBuilder.group({
+      fname: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]]
+  });
   }
 
 
