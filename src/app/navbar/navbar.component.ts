@@ -17,6 +17,8 @@ export class NavbarComponent implements OnInit {
     this.isAuth()
   }
 
+  //Si el usuario esta logueado cambiamos el valor de la variable que nos permitirar mostrar botones para cada caso
+
   isAuth() {
     this.authService.isAuth().subscribe(auth => {
       if (auth) {
@@ -27,11 +29,12 @@ export class NavbarComponent implements OnInit {
     });
   }
 
-
   onLogin() {
     this.router.navigate(['/login'])
   }
 
+  // termina la sesion y redirige al login
+  
   onLogOut() {
     this.authService.logoutUser().then(res => this.router.navigate(['/login']))
   }

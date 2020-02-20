@@ -1,4 +1,30 @@
-<div *ngFor="let movie of movies">
-    {{movie}}
+<div class="container">
+    <h1 class="display-4 text-center">Cartelera</h1>
+    <div class="text-center">
+        <p>Busca una pelicula</p>
+        <input type="text" [(ngModel)]="movieSearch">
+        <button class="btn ml-2" style="background-color: green;" (click)="searchMovie(movieSearch)">Search</button>
+    </div>
+    <div class="row">
+
+        <div *ngFor="let movie of movies" class="mt-3 col-4">
+            <div class="card">
+                <img class="card-img-top " [src]="movie.Poster ">
+                <div class="card-body ">
+                    <h5 class="card-title ">{{movie.Title}}</h5>
+                    <p class="card-text ">{{movie.Plot}}</p>
+                </div>
+                <div class="card-body ">
+                    <button class="card-link btn btn-secondary" [routerLink]="['/movie', movie.Title]">Información</button>
+                    <button *ngIf="isLogged == true" class="card-link btn btn-primary" (click)="addToFav(movie)">Favoritos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div *ngIf="movieExist" class="alert alert-danger fixed-bottom text-center" role="alert">
+        Esta pelicula ya esta añadida a tus favoritos
+    </div>
+    <div *ngIf="movieCorrect" class="alert alert-success fixed-bottom text-center" role="alert">
+        Pelicula Añadida Correctamente
+    </div>
 </div>
-fsdafsda

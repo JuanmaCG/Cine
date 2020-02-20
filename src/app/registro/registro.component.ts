@@ -3,7 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormGroup, Validators, FormControl } from '@angular/forms';
 
 
 @Component({
@@ -13,32 +13,39 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class RegistroComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder, private modalService: NgbModal, private router: Router, private authService: AuthService, private db: AngularFirestore) { }
+  constructor(private modalService: NgbModal, private router: Router, private authService: AuthService, private db: AngularFirestore) { 
+    {
+      this.registerForm = new FormGroup({
+        'name':new FormControl('',  [Validators.required,Validators.maxLength(255)]),
+        'password':new FormControl('',  [Validators.required, Validators.minLength(6), Validators.maxLength(255)]),
+        'email':new FormControl('',  [Validators.required, Validators.minLength(5), Validators.maxLength(255), Validators.pattern("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")]),
+      })
+    }
+  }
 
-  public email: string = '';
-  public password: string = '';
-  public name: string = '';
+  public submitted = false;
   public registered: boolean = false;
   public registeredFail: boolean = false;
 
   registerForm: FormGroup;
 
 
-  ngOnInit() {
-    this.registerForm = this.formBuilder.group({
-      fname: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-  });
+  ngOnInit() { 
+
   }
 
+  //Creamos el modal y lo abrimos
 
   registerModal(content) {
-    this.modalService.open(content, { centered: true});
+    this.modalService.open(content, { centered: true });
   }
-  
+
+
+  /* Utilizamos el metodo de registro por correo de firebase al que le pasamos el email y la contraseña
+  y creamos la coleccion en firestore con su correo */
+
   onAddUser() {
-    this.authService.registerUser(this.email, this.password)
+    this.authService.registerUser(this.registerForm.value.email, this.registerForm.value.password)
       .then((res) => {
         this.authService.isAuth().subscribe(user => {
           this.db.doc(user.email + '/data').set({
@@ -46,27 +53,44 @@ export class RegistroComponent implements OnInit {
           });
           if (user) {
             user.updateProfile({
-              displayName: '', 
+              displayName: '',
             }).then(() => {
               this.registered = true;
-            }).catch((error) => console.log('error', error));
+            }).catch((error) => error);
           }
         });
       }).catch(err => this.registeredFail = true);
+    this.onSubmit()
   }
+
+  // Metodo para loguearse con google
+
   onLoginGoogle(): void {
     this.authService.loginGoogleUser()
       .then((res) => {
         this.onLoginRedirect();
-      }).catch(err => console.log('err', err.message));
+      }).catch(err => err);
   }
- 
+
+  // Redirige a la cartelera
   onLoginRedirect(): void {
     this.router.navigate(['cartelera']);
   }
 
+  //Cirerra el modal
   closeModal() {
     this.modalService.dismissAll()
+  }
+
+  get f() { return this.registerForm.controls; }
+
+  onSubmit() {
+    this.submitted = true;
+
+    // Parar si el formulario es invalido
+    if (this.registerForm.invalid) {
+      return;
+    }
   }
 
 }

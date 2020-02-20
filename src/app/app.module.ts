@@ -8,7 +8,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireAuthModule, AngularFireAuth } from '@angular/fire/auth';
 import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { AngularFireAuthGuard, AngularFireAuthGuardModule } from "@angular/fire/auth-guard";
+import { AngularFireAuthGuardModule } from "@angular/fire/auth-guard";
 import { environment } from '../environments/environment';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -18,9 +18,8 @@ import { LoginComponent } from './login/login.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { RegistroComponent } from './registro/registro.component';
 import { HttpClientModule } from "@angular/common/http";
-import { CarteleraTestComponent } from './cartelera-test/cartelera-test.component';
+import { CarteleraComponent } from './cartelera/cartelera.component';
 import { MovieDetailsComponent } from './movie-details/movie-details.component';
-import { AuthGuard } from './auth.guard';
 import { ErrorComponent } from './error/error.component';
 
 @NgModule({
@@ -30,7 +29,7 @@ import { ErrorComponent } from './error/error.component';
     LoginComponent,
     NavbarComponent,
     RegistroComponent,
-    CarteleraTestComponent,
+    CarteleraComponent,
     MovieDetailsComponent,
     ErrorComponent
   ],
@@ -48,7 +47,7 @@ import { ErrorComponent } from './error/error.component';
     HttpClientModule,
     AngularFireAuthGuardModule
   ],
-  providers: [AngularFireAuth, AuthGuard],
+  providers: [AngularFireAuth],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -15,9 +15,11 @@ export class LoginComponent implements OnInit {
   constructor(public afAuth: AngularFireAuth, private router: Router, private authService: AuthService, private afs: AngularFirestore) { }
   public email: string = '';
   public password: string = '';
-  err;
-  ngOnInit() {
-  }
+  public err;
+
+  ngOnInit() {}
+
+  //Mediante el metodo proporcionado por firebase le pasamos el email y password y redirigimos a la pagina de cartelera
 
   onLogin(): void {
     this.authService.loginEmailUser(this.email, this.password)
@@ -25,6 +27,10 @@ export class LoginComponent implements OnInit {
         this.onLoginRedirect();
       }).catch(err => this.err = "Este email no existe en nuestra base de datos");
   }
+
+  /* Metodo de autentificacion de google el cual abre un popup que nos permite loguearnos con gmail
+     Una vez logueado le decimos a firestore que cree una coleccion que se llamara igual que el correo 
+     para guardar las peliculas en favoritos.*/
 
   onLoginGoogle(): void {
     this.afAuth.auth.signInWithPopup( new auth.GoogleAuthProvider()).then((credential) => {
@@ -36,10 +42,12 @@ export class LoginComponent implements OnInit {
     
   }
 
+  // Termina la sesion actual
   onLogout() {
     this.authService.logoutUser();
   }
 
+  //Redirige a la pagina principal
   onLoginRedirect(): void {
     this.router.navigate(['']);
   }

@@ -5,30 +5,30 @@
           </button>
     </div>
     <div class="modal-body">
-        <form #formRegister="ngForm" (ngSubmit)="onAddUser()">
+        <form [formGroup]="registerForm" (ngSubmit)="onAddUser()">
             <h1 class="h3 mb-3 font-weight-normal text-center mt-2">Register</h1>
 
             <div class="form-group">
-                <input type="text" name="name" class="form-control" placeholder="Name" [(ngModel)]="name" required maxlength="50">
+                <input type="text" formControlName="name" name="name" class="form-control" placeholder="Name" required maxlength="50">
             </div>
             <div class="form-group">
-                <input type="email" name="email" class="form-control" placeholder="Email" [(ngModel)]="email" required minlength="8">
+                <input type="email" formControlName="email" name="email" class="form-control" placeholder="Email" required minlength="8">
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="email.touched && !email.valid">
-                <div *ngIf="email.errors.required">Email is required</div>
-                <div *ngIf="email.errors.minlength">Email must be at least 8 characters</div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.controls.email.touched && !registerForm.controls.email.valid">
+                <div *ngIf="registerForm.controls.email.errors.required">Email is required</div>
+                <div *ngIf="registerForm.controls.email.errors.minlength">Must be a valid email</div>
             </div>
             <div class="form-group">
-                <input type="password" name="password" class="form-control" placeholder="Password" [(ngModel)]="password" required minlength="6">
+                <input type="password" formControlName="password" name="password" class="form-control" placeholder="Password">
             </div>
-            <div class="alert alert-danger" role="alert" *ngIf="password.touched && !password.valid">
-                <div *ngIf="password.errors.required">Password is required</div>
-                <div *ngIf="password.errors.minlength">Password must be at least 5 characters</div>
+            <div class="alert alert-danger" role="alert" *ngIf="registerForm.controls.password.touched && !registerForm.controls.password.valid">
+                <div *ngIf="registerForm.controls.password.errors.required">Password is required</div>
+                <div *ngIf="registerForm.controls.password.errors.minlength">Password must be at least 6 characters</div>
             </div>
             <hr>
 
             <div class="modal-footer">
-                <button type="submit" [disabled]="!formRegister.form.valid" class="btn btn-lg btn-secondary btn-block">Register</button>
+                <button type="submit" [disabled]="!registerForm.valid" class="btn btn-lg btn-secondary btn-block">Register</button>
                 <div *ngIf="registered" class="alert alert-success text-center" role="alert">
                     Usuario Creado correctamente
                 </div>

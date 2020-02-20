@@ -18,10 +18,16 @@
                     <li class="list-group-item ">{{movie.Director}}</li>
                 </ul>
                 <div class="card-body ">
-                    <a href="# " class="card-link ">Añadir favorito</a>
+                    <a *ngIf="isLogged == true" (click)="addToFav()" class="card-link btn btn-success">Añadir favorito</a>
                 </div>
             </div>
         </div>
+    </div>
+    <div *ngIf="movieExist" class="alert alert-danger fixed-bottom text-center" role="alert">
+        Esta pelicula ya esta añadida a tus favoritos
+    </div>
+    <div *ngIf="movieCorrect" class="alert alert-success fixed-bottom text-center" role="alert">
+        Pelicula Añadida Correctamente
     </div>
     <button class="btn btn-danger mt-3" [routerLink]="['']">Atras</button>
 </div>

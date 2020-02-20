@@ -15,12 +15,15 @@ export class UserProfileComponent implements OnInit {
   movies = []
   deleteMovieDone: boolean;
 
-  constructor(private movieService: MovieService, private af: AngularFireAuth,private db: AngularFirestore) { }
+  constructor(private movieService: MovieService) { }
 
+  //Inicializamos el componente con las peliculas favoritas de cada usuario
   ngOnInit() {
     this.movies = this.movieService.getMoviesDb()
   }
 
+
+  //Borra la pelicula deseada de favoritos y de la base de datos
   deleteMovie(title: string) {
    this.movieService.deleteFavMovie(title)
    setTimeout(() => {

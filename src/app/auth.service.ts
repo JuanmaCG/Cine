@@ -2,10 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { auth } from 'firebase/app';
-import { Router } from '@angular/router';
 import { User } from './user';
-import { Observable, of } from 'rxjs';
-import { switchMap, map, first } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -34,11 +32,11 @@ export class AuthService {
     });
   }
 
+  // logueo con gmail y creacion de la coleccion en firestore
 
   loginGoogleUser() {
     return this.afsAuth.auth.signInWithPopup(new auth.GoogleAuthProvider())
       .then(credential => {
-        console.log(credential, "fdsahfdkjs")
         this.afs.doc(credential.user.email + '/data').set({
           email: credential.user.email
         });
@@ -46,17 +44,17 @@ export class AuthService {
       })
   }
 
+  //Termina la sesion actual
   logoutUser() {
     return this.afsAuth.auth.signOut();
   }
 
+  //Comprueba si hay algun usuario autentificado
   isAuth() {
     return this.afsAuth.authState.pipe(map(auth => auth));
   }
 
-  getUser(): Promise<any> {
-    return this.afsAuth.authState.pipe(first()).toPromise();
-  }
+  //Actualiza los datos en la base de datos del usuario
 
   private updateUserData(user) {
     const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
